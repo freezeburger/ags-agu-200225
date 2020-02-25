@@ -1,0 +1,19 @@
+{
+  "name": "super-finder",
+  "version": "1.0.0",
+  "description": "Super Finder",
+  "main": "src/sf-master/index.js",
+  "scripts": {
+    "start": "node .",
+    "dev":"nodemon .",
+    "test": "echo 'In Code We Trust'"
+  },
+  "author": "BB",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "colors": "^1.4.0"
+  }
+}
