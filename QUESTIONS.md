@@ -8,3 +8,4 @@
 * G - Dans quel cas peut-on utiliser les `.pipe()` de `Stream` ?
 * C - Peut-on chainer les `.pipe()` ?
 * C -  `const,let,=>,var` ?
+* C- Les Modules ont-ils des `thread` différents ?
