@@ -37,4 +37,4 @@ process.stdout.write(startMessage);
 // TODO code: 'EADDRINUSE'
 startApiResult(config['server-api-result']);
 startApiSearch(config['server-api-search']);
-startWebApp(config['server-web-app']);
+startWebApp(config['server-web-app']).then(console.log)
