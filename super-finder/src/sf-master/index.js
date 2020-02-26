@@ -29,12 +29,17 @@ const startMessage = `
 
 `;
 
-process.stdout.write(startMessage);
+
 
 //----------------------------------------
 // Starting Workers
 //----------------------------------------
 // TODO code: 'EADDRINUSE'
-startApiResult(config['server-api-result']);
-startApiSearch(config['server-api-search']);
-startWebApp(config['server-web-app']).then(console.log)
+const main = async ()=>{
+    process.stdout.write(startMessage);
+    await startApiResult(config['server-api-result']).then( infos => console.log('server-api-result', infos));
+    await startApiSearch(config['server-api-search']).then( infos => console.log('server-api-search', infos));
+    await startWebApp(config['server-web-app']).then( infos => console.log('server-web-app', infos));
+}
+
+main(); 

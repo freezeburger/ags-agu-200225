@@ -10,11 +10,6 @@ const requestHandler = (request,response) => {
 
 const httpServer = createHttpServer(requestHandler);
 
-const defaultListeningCallback = () => {
-    const { address, port } = httpServer.address();
-    console.log(` Started ${module.title} on http://${address}:${port}`)
-}
-
-module.exports.start = ( PORT_NUMBER , listeningCallback = defaultListeningCallback ) => {
-    httpServer.listen(PORT_NUMBER,'localhost', listeningCallback )
-}
+const AppServer = require('../core/app-server');
+const server = new AppServer(httpServer);
+module.exports.start = server.start.bind(server)
