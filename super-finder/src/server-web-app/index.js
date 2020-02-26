@@ -24,22 +24,11 @@ const requestHandler = (request, response) => {
     .pipe(transformerHTML)
     .pipe(response);
 
-  /*   response.on("error", err => console.log(1,err));
-  indexFile.on("error", err =>{
-    console.log(2,err)
-    indexFile.emit('end')
-  });
-  transformerHTML.on("error", err => {
-    console.log(3,err)
-    transformerHTML.emit('end')
-  }); */
 };
 
 const httpServer = createHttpServer(requestHandler);
 
 const AppServer = require("../core/app-server");
 const server = new AppServer(httpServer);
-
-// const server = new require('../core/app-server')(httpServer);
 
 module.exports.start = server.start.bind(server);

@@ -6,16 +6,13 @@ const {start:startWebApp} = require('../server-web-app');
 
 const greetings = '° Welcome to Super Finder !!'.bgGreen.black
 const title = 'Super Finder';
-// const pid = process.pid;
 const { pid } = process;
 const time = Date.now();
-// Must Hav a start method
 const config = {
     'server-web-app':8081,
     'server-api-search':8082,
     'server-api-result':8083
 }
-process.title = title;
 
 
 const startMessage = `
@@ -29,13 +26,12 @@ const startMessage = `
 
 `;
 
-
-
 //----------------------------------------
 // Starting Workers
 //----------------------------------------
 // TODO code: 'EADDRINUSE'
 const main = async ()=>{
+    process.title = title;
     process.stdout.write(startMessage);
     await startApiResult(config['server-api-result']).then( infos => console.log('server-api-result', infos));
     await startApiSearch(config['server-api-search']).then( infos => console.log('server-api-search', infos));
