@@ -30,8 +30,9 @@ const httpServer = createHttpServer(requestHandler);
   console.log(` Started ${module.title} on http://${address}:${port}`);
 };
  */
+
 // Doit retourner une new Promise donnat les infos `http://${address}:${port}`
-module.exports.start = PORT_NUMBER => {
+/* module.exports.start = PORT_NUMBER => {
   return new Promise((resolve, reject) => {
     //  console.log(` Started ${module.title} on http://${address}:${port}`);
     httpServer.listen(PORT_NUMBER, "localhost", () =>
@@ -39,3 +40,11 @@ module.exports.start = PORT_NUMBER => {
     );
   });
 };
+ */
+
+const { promisify } = require("util");
+
+module.exports.start = PORT_NUMBER => {
+ const listen = promisify( httpServer.listen.bind( httpServer ) )
+ return listen(PORT_NUMBER,'localhost').then( ()=> httpServer.address())
+}; 
