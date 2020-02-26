@@ -39,16 +39,8 @@ const main = async ()=>{
     process.title = title;
     process.stdout.write(startMessage);
 
-    sfEngine.on(sfEngine.events.STARTED, ()=> {
-        console.log('sfEngine Started'.green)
-        sfEngine.emit(sfEngine.events.JOB_START, 'Tomato')
-    })
-    sfMailer.on(sfMailer.events.STARTED, ()=> console.log('sfMailer Started'.green))
-    sfRegistry.on(sfRegistry.events.STARTED, ()=> console.log('sfRegistry Started'.green))
-
-    await sfEngine.start().then( ()=> console.log('Ask sfEngine to Start'))
-    await sfMailer.start().then( ()=> console.log('Ask sfMailer to Start'))
-    await sfRegistry.start().then( ()=> console.log('Ask sfRegistry to Start'))
+    sfEngine.emit(sfEngine.events.JOB_START, 'Triskell')
+    sfEngine.on(sfEngine.events.JOB_FINISH, console.log)
 
     console.log(``)
 
