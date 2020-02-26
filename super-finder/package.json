@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "colors": "^1.4.0",
-    "got": "^10.6.0"
+    "got": "^10.6.0",
+    "html-miner": "^2.0.0"
   }
 }

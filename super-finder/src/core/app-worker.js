@@ -8,8 +8,8 @@ class AppWorker extends EventEmitter{
         this.events = Object.seal({
             INIT:1,
             STARTED:2,
-            FINISHING:3,
-            FINISHED:4
+            JOB_START:3,
+            JOB_FINISH:4
         });
     }
 

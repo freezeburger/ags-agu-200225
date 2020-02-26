@@ -39,7 +39,10 @@ const main = async ()=>{
     process.title = title;
     process.stdout.write(startMessage);
 
-    sfEngine.on(sfEngine.events.STARTED, ()=> console.log('sfEngine Started'.green))
+    sfEngine.on(sfEngine.events.STARTED, ()=> {
+        console.log('sfEngine Started'.green)
+        sfEngine.emit(sfEngine.events.JOB_START, 'Tomato')
+    })
     sfMailer.on(sfMailer.events.STARTED, ()=> console.log('sfMailer Started'.green))
     sfRegistry.on(sfRegistry.events.STARTED, ()=> console.log('sfRegistry Started'.green))
 
