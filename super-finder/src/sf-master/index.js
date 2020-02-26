@@ -30,9 +30,25 @@ const startMessage = `
 // Starting Workers
 //----------------------------------------
 // TODO code: 'EADDRINUSE'
+
+const sfEngine= require('../sf-engine');
+const sfMailer= require('../sf-mailer');
+const sfRegistry= require('../sf-registry');
+
 const main = async ()=>{
     process.title = title;
     process.stdout.write(startMessage);
+
+    sfEngine.on(sfEngine.events.STARTED, ()=> console.log('sfEngine Started'.green))
+    sfMailer.on(sfMailer.events.STARTED, ()=> console.log('sfMailer Started'.green))
+    sfRegistry.on(sfRegistry.events.STARTED, ()=> console.log('sfRegistry Started'.green))
+
+    await sfEngine.start().then( ()=> console.log('Ask sfEngine to Start'))
+    await sfMailer.start().then( ()=> console.log('Ask sfMailer to Start'))
+    await sfRegistry.start().then( ()=> console.log('Ask sfRegistry to Start'))
+
+    console.log(``)
+
     await startApiResult(config['server-api-result']).then( infos => console.log('server-api-result', infos));
     await startApiSearch(config['server-api-search']).then( infos => console.log('server-api-search', infos));
     await startWebApp(config['server-web-app']).then( infos => console.log('server-web-app', infos));
