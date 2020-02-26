@@ -5,7 +5,7 @@
   "main": "src/sf-master/index.js",
   "scripts": {
     "start": "node .",
-    "dev":"nodemon .",
+    "dev": "nodemon .",
     "test": "echo 'In Code We Trust'"
   },
   "author": "BB",
