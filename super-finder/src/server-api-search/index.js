@@ -19,12 +19,12 @@ koaRouter.get('/', (ctx, next) => {
 
 koaRouter.get('/search', (ctx, next) => {
   ctx.body = 'Search';
-  console.log(ctx.request.body)
+  console.log(ctx.request.body);
 });
 
 const generalHandler = async (ctx,next) => {
   console.log("Incoming Request");
-  next()
+  next();
 };
 
 koaServer.use(cors());

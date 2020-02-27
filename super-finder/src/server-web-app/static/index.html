@@ -46,11 +46,25 @@
         Google: "https://placehold.it/250x250"
       };
 
-      const elems = document.querySelectorAll(".autocomplete");
-      const instances = M.Autocomplete.init(elems, { data });
+      const inputField = document.querySelector(".autocomplete");
+      const instances = M.Autocomplete.init(inputField, { data });
 
-      const searchButton = document.querySelector('button[name=action]')
-      searchButton.onclick = () => alert('Click !')
+      const searchButton = document.querySelector("button[name=action]");
+      searchButton.onclick = () => {
+        fetch("http://localhost:8082/search", {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          method: "POST",
+          body: JSON.stringify({
+            keywords: inputField.value,
+            email: "info@orsys.fr"
+          })
+        })
+          .then(res => res.json())
+          .then(console.log);
+      };
     </script>
   </body>
 </html>
