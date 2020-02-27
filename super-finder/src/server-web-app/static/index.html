@@ -51,7 +51,7 @@
 
       const searchButton = document.querySelector("button[name=action]");
       searchButton.onclick = () => {
-        fetch("http://localhost:8082/search", {
+        fetch("http://localhost:{{SEARCH_API_PORT_NUMBER}}/search", {
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json"

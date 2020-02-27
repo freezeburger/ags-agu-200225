@@ -8,10 +8,13 @@ const greetings = '° Welcome to Super Finder !!'.bgGreen.black
 const title = 'Super Finder';
 const { pid } = process;
 const time = Date.now();
+
+require('dotenv').config();
+
 const config = {
-    'server-web-app':8081,
-    'server-api-search':8082,
-    'server-api-result':8083
+    'server-web-app':process.env.WEB_PORT,
+    'server-api-search':process.env.API_SEARCH_PORT,
+    'server-api-result':process.env.API_RESULT_PORT
 }
 
 
@@ -40,7 +43,7 @@ const main = async ()=>{
     process.stdout.write(startMessage);
 
     sfEngine.emit(sfEngine.events.JOB_START, 'Triskell')
-    //sfEngine.on(sfEngine.events.JOB_FINISH, data => require('fs').createWriteStream('data.json').write(JSON.stringify(data)))
+    // sfEngine.on(sfEngine.events.JOB_FINISH, data => require('fs').createWriteStream('data.json').write(JSON.stringify(data)))
 
     console.log(``)
 

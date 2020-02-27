@@ -13,7 +13,8 @@ const requestHandler = (request, response) => {
 
   const transformerHTML = new TransformPipe({
     transform(text, encoding, next) {
-      const html = text.toString().replace(/{{TITLE}}/g, module.title);
+      let html = text.toString().replace(/{{TITLE}}/g, module.title);
+      html = html.replace(/{{SEARCH_API_PORT_NUMBER}}/g, process.env.API_SEARCH_PORT);
       return next(null, html);
     }
   });

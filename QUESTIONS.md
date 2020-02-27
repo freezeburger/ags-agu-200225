@@ -7,5 +7,5 @@
      * Dependament de la valeur recue (byVal,ByRef) ou de la logique de transmission (protection) ?
 * ✔️ G - Dans quel cas peut-on utiliser les `.pipe()` de `Stream` ?
 * ✔️ C - Peut-on chainer les `.pipe()` ?
-* C -  `const,let,=>,var` ?
+* ✔️ C -  `const,let,=>,var` ?
 * ✔️ C- Les Modules ont-ils des `thread` différents ?

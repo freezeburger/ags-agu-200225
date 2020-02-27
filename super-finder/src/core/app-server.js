@@ -6,7 +6,7 @@ class AppServer {
     this.listen = promisify(this.server.listen.bind(this.server));
   }
   start(PORT_NUMBER) {
-    return this.listen(PORT_NUMBER, "localhost").then(() =>
+    return this.listen(PORT_NUMBER, process.env.GLOBAL_HOST).then(() =>
       this.server.address()
     );
   }
