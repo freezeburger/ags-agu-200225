@@ -18,5 +18,4 @@ worker.once(worker.events.INIT, () => {
   worker.emit(worker.events.STARTED);
 });
 
-
 module.exports = worker;

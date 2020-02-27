@@ -43,6 +43,20 @@ eg. `npm run start` ou `npm start`
 * `net`
 * `os`
 * `path`
+* `util`
+* `stream`
+* `event`
+* ``
+
+## Ecosysteme Node
+
+> https://www.npmjs.com/
+
+* `html-miner` - html parser
+* `nodemon` - relancer les dev
+* `got` - request http
+* `expressjs` - routerhttp
+* `koa` + `koa-router` - routerhttp
 
 ## Node Concept fondamentaux
 
