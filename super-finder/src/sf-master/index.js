@@ -3,13 +3,14 @@ const { username } = require('os').userInfo();
 const {start:startApiResult} = require('../server-api-result');
 const {start:startApiSearch} = require('../server-api-search');
 const {start:startWebApp} = require('../server-web-app');
+const dotenv = require('dotenv');
 
 const greetings = '° Welcome to Super Finder !!'.bgGreen.black
 const title = 'Super Finder';
 const { pid } = process;
 const time = Date.now();
 
-require('dotenv').config();
+dotenv.config(); // Load .env file keys in process.env
 
 const config = {
     'server-web-app':process.env.WEB_PORT,
