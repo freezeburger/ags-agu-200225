@@ -10,6 +10,8 @@ const title = 'Super Finder';
 const { pid } = process;
 const time = Date.now();
 
+global.Broker = {}
+
 dotenv.config(); // Load .env file keys in process.env
 
 const config = {
