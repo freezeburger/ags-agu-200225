@@ -40,7 +40,7 @@ const main = async ()=>{
     process.stdout.write(startMessage);
 
     sfEngine.emit(sfEngine.events.JOB_START, 'Triskell')
-    sfEngine.on(sfEngine.events.JOB_FINISH, console.log)
+    //sfEngine.on(sfEngine.events.JOB_FINISH, data => require('fs').createWriteStream('data.json').write(JSON.stringify(data)))
 
     console.log(``)
 

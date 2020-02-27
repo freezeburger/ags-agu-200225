@@ -1,15 +1,23 @@
 const { createServer: createHttpServer } = require("http");
-const { createServer: createTcpServer } = require("net");
 
 module.title = "Server Api Search";
 
-const requestHandler = (request, response) => {
+/**
+ * Updating to KOA JS
+ */
+
+const Koa = require("koa");
+const koaServer = new Koa();
+
+const requestHandler = async (ctx) => {
   console.log("Incoming Request");
-  response.end(module.title);
+  ctx.body = module.title;
 };
 
-const httpServer = createHttpServer(requestHandler);
+koaServer.use(requestHandler);
 
-const AppServer = require('../core/app-server');
+const httpServer = createHttpServer(koaServer.callback());
+
+const AppServer = require("../core/app-server");
 const server = new AppServer(httpServer);
 module.exports.start = server.start.bind(server);
