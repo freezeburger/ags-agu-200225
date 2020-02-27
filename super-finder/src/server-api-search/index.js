@@ -18,7 +18,11 @@ koaRouter.get('/', (ctx, next) => {
 });
 
 koaRouter.get('/search', (ctx, next) => {
-  ctx.body = 'Search';
+  ctx.body = 'This is the Search Endpoint call it in POST';
+});
+
+koaRouter.post('/search', (ctx, next) => {
+  ctx.body = {message:true};
   console.log(ctx.request.body);
 });
 
