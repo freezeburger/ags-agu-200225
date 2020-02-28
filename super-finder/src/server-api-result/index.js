@@ -17,13 +17,29 @@ expressServer.get("/", (req, res, next) => {
   res.end(module.title);
 });
 
-expressServer.get("/results", (req, res, next) => {
+expressServer.get("/requests", (req, res, next) => {
   res.type('application/json')
-  require("fs")
-    .createReadStream(require("path").resolve(__dirname, "data.json"), {
-      encoding: "utf-8"
-    })
-    .pipe(res);
+  global.PubSub.publish(PubSub.topics.SEARCH_RESULT_LIST_REQUEST,null)
+
+  const subscriber = (msg,data) =>{
+    res.json(data);
+    global.PubSub.unsubscribe(subscriber);
+  }
+  global.PubSub.subscribe(PubSub.topics.SEARCH_RESULT_LIST_RESPONSE,subscriber)
+
+});
+
+expressServer.get("/results", (req, res, next) => {
+
+  res.type('application/json')
+  global.PubSub.publish(PubSub.topics.SEARCH_RESULT_KEYWORD_REQUEST, {keywords:req.query.keyword})
+
+  const subscriber = (msg,data) =>{
+    res.json(data);
+    global.PubSub.unsubscribe(subscriber);
+  }
+  global.PubSub.subscribe(PubSub.topics.SEARCH_RESULT_KEYWORD_RESPONSE,subscriber)
+
 });
 
 const httpServer = createHttpServer(expressServer);

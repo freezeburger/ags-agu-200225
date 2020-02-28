@@ -9,37 +9,56 @@ const connectMongo = promisify(MongoClient.connect.bind(MongoClient));
 let url;
 let dbName;
 
-const saveNewSearch = (msg, data) => {
+const saveNewSearchRequest = (msg, data) => {
   connectMongo(url)
     .then(client => {
-      client.db(dbName).collection("searches").insertOne(data);
-      return client;
-    }).then(client => client.close());
-};
-
-const readSearches = (msg, data) => {
-  console.log("registry", msg, data);
+      client.db(dbName).collection("requests").insertOne(data);
+      client.close()
+    })
 };
 
 const saveSearchResults = (msg, data) => {
     connectMongo(url)
     .then(client => {
-      client.db(dbName).collection("results").insertOne(data);
-      return client;
-    }).then(client => client.close());
+      client.db(dbName).collection("searches").insertOne(data);
+      client.close()
+    })
 };
 
-const readResultFormSearch = (msg, data) => {
-  console.log("registry", msg, data);
+const readSearchesRequest = (msg, data) => {
+  connectMongo(url)
+  .then(client => {
+    client.db(dbName).collection("searches").find({}).toArray( (err,data) => {
+      global.PubSub.publish(PubSub.topics.SEARCH_RESULT_LIST_RESPONSE, data.map( item => item.search) || [])
+    })
+    client.close()
+  })
+};
+
+const readResultFormSearch = (msg, data = {} ) => {
+
+  console.log(data)
+
+  const keyword =  new RegExp(data.keywords || '.',"g");
+
+  connectMongo(url)
+  .then(client => {
+    client.db(dbName).collection("searches").find({'search.keywords':keyword}).toArray( (err,data) => {
+      global.PubSub.publish(PubSub.topics.SEARCH_RESULT_KEYWORD_RESPONSE, data.map( item => item.results)[0] || [])
+    })
+    client.close()
+  })
 };
 
 const initialize = () => {
   url = `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}`;
   dbName = process.env.DB_NAME;
-  global.PubSub.subscribe(PubSub.topics.SEARCH_REQUEST_NEW, saveNewSearch);
+
+  global.PubSub.subscribe(PubSub.topics.SEARCH_REQUEST_NEW, saveNewSearchRequest);
   global.PubSub.subscribe(PubSub.topics.SEARCH_REQUEST_DONE, saveSearchResults);
-  global.PubSub.subscribe(PubSub.topics.SEARCH_RESULT_GET, readResultFormSearch);
-  global.PubSub.subscribe(PubSub.topics.SEARCH_RESULT_LIST, readSearches);
+
+  global.PubSub.subscribe(PubSub.topics.SEARCH_RESULT_KEYWORD_REQUEST, readResultFormSearch);
+  global.PubSub.subscribe(PubSub.topics.SEARCH_RESULT_LIST_REQUEST, readSearchesRequest);
 };
 
 worker.once(worker.events.INIT, () => {
