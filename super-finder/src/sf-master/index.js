@@ -42,14 +42,21 @@ const startMessage = `
     Started at : ${time} - ${new Date(time)}
     By : ${username}
 
-    **Configuration**
 
-    ${config}
 `;
 
+console.table(config);
+
 const main = async () => {
+  require("console-clear")();
+
   process.title = title;
+
   process.stdout.write(startMessage);
+  console.log(`
+  **Environment Configuration**
+  `);
+  console.table(config);
 
   global.PubSub.subscribe(PubSub.topics.SEARCH, (msg, data) => {
     // GENERAL LISTENER
@@ -58,22 +65,27 @@ const main = async () => {
   //----------------------------------------
   // Starting Workers
   //----------------------------------------
-  sfEngine
-    .start()
-    .then(() =>
-      sfEngine.on(worker.events.STARTED, () => console.log("sfEngine Started"))
-    );
-  sfMailer.start()
-  .then(() =>
-    sfEngine.on(worker.events.STARTED, () => console.log("sfEngine Started"))
-  );
-  sfRegistry.start()
-  .then(() =>
-    sfEngine.on(worker.events.STARTED, () => console.log("sfRegistry Started"))
-  );
+  console.log(`
+  **Starting Workers**
+  `);
+  console.log("Starting sfEngine".blue)
+  sfEngine.on(sfEngine.events.STARTED, () => console.log("sfEngine Started".green));
+  await sfEngine.start()
+
+  console.log("Starting sfMailer".blue)
+  sfMailer.on(sfMailer.events.STARTED, () => console.log("sfMailer Started".green));
+  await sfMailer.start()
+
+  console.log("Starting sfRegistry".blue)
+  sfRegistry.on(sfRegistry.events.STARTED, () =>console.log("sfRegistry Started".green) );
+  await sfRegistry.start()
   //----------------------------------------
   // Starting Server
   //----------------------------------------
+
+  console.log(`
+  **Starting Servers **
+  `);
 
   await startApiResult(config["server-api-result"]).then(infos =>
     console.log("server-api-result", infos)
