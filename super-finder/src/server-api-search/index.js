@@ -23,8 +23,7 @@ koaRouter.get('/search', (ctx, next) => {
 
 koaRouter.post('/search', (ctx, next) => {
   ctx.body = {message:true};
-  //console.log(ctx.request.body);
-  global.PubSub.publish(PubSub.topics.SEARCH_REQUEST_NEW,ctx.request.body)
+  global.PubSub.publish(PubSub.topics.SEARCH_REQUEST_NEW, ctx.request.body )
 });
 
 const generalHandler = async (ctx,next) => {

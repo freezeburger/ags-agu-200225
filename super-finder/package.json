@@ -26,6 +26,7 @@
     "html-miner": "^2.0.0",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
+    "mongodb": "^3.5.4",
     "pubsub-js": "^1.8.0"
   }
 }

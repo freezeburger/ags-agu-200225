@@ -44,14 +44,13 @@ const startMessage = `
 
 `;
 
-console.table(config);
-
 const main = async () => {
   require("console-clear")();
 
   process.title = title;
 
   process.stdout.write(startMessage);
+
   console.log(`
   **Environment Configuration**
   `);
@@ -68,15 +67,15 @@ const main = async () => {
   **Starting Workers**
   `);
   console.log("Starting sfEngine".blue)
-  sfEngine.on(sfEngine.events.STARTED, () => console.log("sfEngine Started".green));
+  sfEngine.on(sfEngine.events.STARTED, () => console.log("✔️ - sfEngine Started".green));
   await sfEngine.start()
 
   console.log("Starting sfMailer".blue)
-  sfMailer.on(sfMailer.events.STARTED, () => console.log("sfMailer Started".green));
+  sfMailer.on(sfMailer.events.STARTED, () => console.log("✔️ - sfMailer Started".green));
   await sfMailer.start()
 
   console.log("Starting sfRegistry".blue)
-  sfRegistry.on(sfRegistry.events.STARTED, () =>console.log("sfRegistry Started".green) );
+  sfRegistry.on(sfRegistry.events.STARTED, () =>console.log("✔️ - sfRegistry Started".green) );
   await sfRegistry.start()
   //----------------------------------------
   // Starting Server
