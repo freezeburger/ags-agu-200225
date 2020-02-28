@@ -7,6 +7,8 @@ const { resolve: resolvePath } = require("path");
 module.title = "Server Web App";
 
 const requestHandler = (request, response) => {
+  console.time("REQ");
+
   if (request.url === "/favicon.ico") return response.end();
 
   console.log(`${module.title} : Incoming Request`);
@@ -14,7 +16,10 @@ const requestHandler = (request, response) => {
   const transformerHTML = new TransformPipe({
     transform(text, encoding, next) {
       let html = text.toString().replace(/{{TITLE}}/g, module.title);
-      html = html.replace(/{{SEARCH_API_PORT_NUMBER}}/g, process.env.API_SEARCH_PORT);
+      html = html.replace(
+        /{{SEARCH_API_PORT_NUMBER}}/g,
+        process.env.API_SEARCH_PORT
+      );
       return next(null, html);
     }
   });
@@ -25,6 +30,10 @@ const requestHandler = (request, response) => {
     .pipe(transformerHTML)
     .pipe(response);
 
+/*   console.groupCollapsed("Houuuu");
+  console.timeEnd("REQ");
+  console.table(process.env)
+  console.groupEnd(); */
 };
 
 const httpServer = createHttpServer(requestHandler);

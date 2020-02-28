@@ -81,3 +81,19 @@ Les `Stream` sont événementiels (prossibilité de programme des evenements.)
 
 `Stream.on('EVENT_NAME', callback)`
 `Stream.addListener('EVENT_NAME', callback)`
+
+## JavaScript
+
+* `function` vs arrow function (lambda) `() => true`
+    * `function` possede un `prototype` (objet) et peuvent servir a fabriquer des objet.
+    * `() => true` pas de  `prototype`, preserve le `this` et appel en temps que fonction uniquement.
+* `const {name} = user` destructuration de l'objet user pour extraire la clé name dans une variable du meme nom.
+* `class`, `extends`, `this`, `constructor`, `new`, `super`, `static`
+* `const letters = [...'Hello']`
+
+## Pattern
+
+> Penser : 'SOLID' !!
+
+* `PubSub`
+* `Promise`
