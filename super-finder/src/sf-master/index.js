@@ -42,7 +42,6 @@ const startMessage = `
     Started at : ${time} - ${new Date(time)}
     By : ${username}
 
-
 `;
 
 console.table(config);
