@@ -37,13 +37,12 @@ const readSearchesRequest = (msg, data) => {
 
 const readResultFormSearch = (msg, data = {} ) => {
 
-  console.log(data)
 
-  const keyword =  new RegExp(data.keywords || '.',"g");
+  const keywords =  new RegExp(data.keywords || '.',"g");
 
   connectMongo(url)
   .then(client => {
-    client.db(dbName).collection("searches").find({'search.keywords':keyword}).toArray( (err,data) => {
+    client.db(dbName).collection("searches").find({'search.keywords':keywords}).toArray( (err,data) => {
       global.PubSub.publish(PubSub.topics.SEARCH_RESULT_KEYWORD_RESPONSE, data.map( item => item.results)[0] || [])
     })
     client.close()
