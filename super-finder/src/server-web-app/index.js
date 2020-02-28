@@ -7,8 +7,6 @@ const { resolve: resolvePath } = require("path");
 module.title = "Server Web App";
 
 const requestHandler = (request, response) => {
-  console.time("REQ");
-
   if (request.url === "/favicon.ico") return response.end();
 
   console.log(`${module.title} : Incoming Request`);
@@ -30,10 +28,13 @@ const requestHandler = (request, response) => {
     .pipe(transformerHTML)
     .pipe(response);
 
-/*   console.groupCollapsed("Houuuu");
-  console.timeEnd("REQ");
+  /* 
+  console.groupCollapsed("Group Title");
+  console.time("Start Action");
+  console.timeEnd("End Action");
   console.table(process.env)
-  console.groupEnd(); */
+  console.groupEnd();
+  */
 };
 
 const httpServer = createHttpServer(requestHandler);
