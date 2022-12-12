@@ -21,7 +21,7 @@
     "colors": "^1.4.0",
     "console-clear": "^1.1.1",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "got": "^10.6.0",
     "html-miner": "^2.0.0",
     "koa": "^2.11.0",
